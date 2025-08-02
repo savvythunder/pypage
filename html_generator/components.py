@@ -168,17 +168,14 @@ class ProgressBar(ComponentBase):
         if animated:
             bar_class += " progress-bar-animated"
         
-        progress_html = f'''
-        <div class="{bar_class}" role="progressbar" 
-             style="width: {percentage}%" 
-             aria-valuenow="{value}" 
-             aria-valuemin="0" 
-             aria-valuemax="{max_value}">
-            {label}
-        </div>
-        '''
+        progress_html = f'''<div class="{bar_class}" role="progressbar" style="width: {percentage}%" aria-valuenow="{value}" aria-valuemin="0" aria-valuemax="{max_value}">{label}</div>'''
         
         self.content = progress_html
+    
+    def render(self):
+        """Override render to use content instead of child_elements"""
+        attrs = self.render_attributes()
+        return f"<{self.tag}{attrs}>{self.content}</{self.tag}>"
 
 class Accordion(ComponentBase):
     """Bootstrap accordion component"""

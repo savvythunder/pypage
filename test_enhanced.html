@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Enhanced Features</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #4a7dff 0%, #6a11cb 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+            margin-left: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 60%;
+            left: 20%;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link i {
+            margin-left: 5px;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform: translateY(15px);
+            z-index: 999;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-link {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            display: block;
+        }
+
+        .dropdown-link:hover {
+            color: #667eea;
+        }
+
+        .nav-btn {
+            background-color: white;
+            color: #4a7dff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 21px;
+            position: relative;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: all 0.3s;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+            top: 9px;
+        }
+
+        .hamburger span:nth-child(4) {
+            top: 18px;
+        }
+
+        .hamburger.open span:nth-child(1),
+        .hamburger.open span:nth-child(4) {
+            top: 9px;
+            width: 0%;
+            left: 50%;
+        }
+
+        .hamburger.open span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        @media (max-width: 992px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 85px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 85px);
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                transition: all 0.5s;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 1rem 0;
+                width: 100%;
+            }
+
+            .nav-link {
+                color: #333;
+                font-size: 1.2rem;
+                padding: 0.5rem 0;
+            }
+
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                display: none;
+                border-radius: 0;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                transition: none;
+                margin-top: 0.5rem;
+            }
+
+            .dropdown-menu.show {
+                display: block;
+            }
+
+            .dropdown-item {
+                padding: 0.5rem 0;
+            }
+
+            .dropdown-link {
+                font-size: 1rem;
+                padding-left: 1rem;
+            }
+
+            .nav-btn {
+                width: 100%;
+                text-align: left;
+                padding: 0.75rem 0;
+                background-color: transparent;
+                color: #667eea;
+                box-shadow: none;
+                font-size: 1.2rem;
+            }
+
+            .nav-btn:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    
+        <header class="bg-dark text-light py-3">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        
+                        <h1 class="h3 mb-0">Testing</h1>
+                    </div>
+                    
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <span class="logo-icon">🌟</span>
+                    <span>NexusLabs</span>
+                </a>
+
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-links">
+                    
+                    <li class="nav-item">
+                        <button class="nav-btn">Get Started</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+                </div>
+            </div>
+        </header>
+        
+    <main class="container mt-4">
+        <div class="container"><h1>Enhanced Features Test</h1><div class="alert alert-success alert-dismissible fade show"></div><form action="/test" method="POST">
+<div class="mb-3"><label for="name" class="form-label">Your Name</label>
+<input type="text" name="name" placeholder="Name"></div>
+<div class="mb-3"><label for="message" class="form-label">Message</label>
+<textarea name="message" rows="3"></textarea></div>
+<div class="mb-3"><label for="category" class="form-label">Category</label>
+<select name="category">
+<option value="test">Test</option>
+</select></div>
+<button class="btn btn-primary" type="submit">Submit</button>
+</form><div class="row"><div class="col-md-6">Column 1 content</div><div class="col-md-6">Column 2 content</div></div><div class="progress"></div></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        // Mobile menu toggle and scroll effect
+        const navbar = document.querySelector('.navbar');
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        // Add scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        navItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            if (link) {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 992) {
+                        hamburger.classList.remove('open');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Toggle dropdowns on mobile
+            const dropdownToggle = item.querySelector('.nav-link i');
+            if (dropdownToggle) {
+                dropdownToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const dropdown = item.querySelector('.dropdown-menu');
+                    dropdown.classList.toggle('show');
+                });
+            }
+        });
+        
+        // Desktop dropdown functionality
+        navItems.forEach(item => {
+            if (window.innerWidth > 992) {
+                const link = item.querySelector('.nav-link');
+                const dropdown = item.querySelector('.dropdown-menu');
+                
+                if (dropdown) {
+                    item.addEventListener('mouseenter', () => {
+                        dropdown.classList.add('show');
+                    });
+                    
+                    item.addEventListener('mouseleave', () => {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            }
+        });
+        
+        // Resize event listener
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                hamburger.classList.remove('open');
+                navLinks.classList.remove('active');
+                
+                // Hide all dropdowns on desktop
+                document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+                    dropdown.classList.remove('show');
+                });
+            }
+        });
+        
+    </script>
+</body>
+</html>
