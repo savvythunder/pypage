@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}HTML Generator - Create Webpages with Python{% endblock %}
+
+{% block content %}
+<div class="hero-section bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">HTML Generator Library</h1>
+                <p class="lead mb-4">Create beautiful, responsive webpages using Python code. Build HTML elements, forms, and layouts with an intuitive, object-oriented approach.</p>
+                <div class="d-flex gap-3">
+                    <a href="{{ url_for('main.editor') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-edit me-2"></i>Start Creating
+                    </a>
+                    <a href="{{ url_for('main.examples') }}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-book me-2"></i>View Examples
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="code-preview bg-dark p-4 rounded">
+                    <pre class="text-success mb-0"><code># Create a webpage with Python
+page = Page("My Website", "Welcome!")
+page.add_content(Heading("About", 2))
+page.add_content(Paragraph("Hello World!"))
+
+# Generate and save HTML
+html = page.generate_html()</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Features Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5 fw-bold">Powerful Features</h2>
+            <p class="lead text-muted">Everything you need to create modern webpages programmatically</p>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-primary mb-3">
+                        <i class="fas fa-puzzle-piece fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">Component-Based</h5>
+                    <p class="card-text">Build webpages using reusable components like Page, Heading, Paragraph, Form, and more.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-success mb-3">
+                        <i class="fas fa-paint-brush fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">CSS Integration</h5>
+                    <p class="card-text">Built-in CSS builder with Bootstrap support and responsive design utilities.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-warning mb-3">
+                        <i class="fas fa-eye fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">Live Preview</h5>
+                    <p class="card-text">Create, edit, and preview your webpages in real-time with our web interface.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-info mb-3">
+                        <i class="fas fa-mobile-alt fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">Responsive Design</h5>
+                    <p class="card-text">Generate mobile-friendly HTML with Bootstrap classes and responsive utilities.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-danger mb-3">
+                        <i class="fas fa-server fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">API Access</h5>
+                    <p class="card-text">Programmatic access via REST API for integration with other applications.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-secondary mb-3">
+                        <i class="fas fa-database fa-3x"></i>
+                    </div>
+                    <h5 class="card-title">Page Management</h5>
+                    <p class="card-text">Save, organize, and manage your generated webpages with built-in storage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Start Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-light rounded p-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h3 class="fw-bold mb-3">Ready to get started?</h3>
+                        <p class="mb-0">Jump into the editor and start creating your first webpage, or browse our examples to see what's possible.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a href="{{ url_for('main.editor') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-rocket me-2"></i>Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Pages Section -->
+{% if recent_pages %}
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="fw-bold mb-4">Recently Created Pages</h3>
+            <div class="row">
+                {% for page in recent_pages %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ page.title }}</h5>
+                            <p class="card-text text-muted">Created {{ page.created_at.strftime('%B %d, %Y') }}</p>
+                            <a href="{{ url_for('main.preview', page_id=page.id) }}" class="btn btn-outline-primary">View Page</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

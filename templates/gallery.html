@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery - HTML Generator{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="fw-bold mb-1">Page Gallery</h2>
+                    <p class="text-muted mb-0">Browse and manage your generated webpages</p>
+                </div>
+                <a href="{{ url_for('main.editor') }}" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Create New Page
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% if pages %}
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0">{{ pages|length }} page{% if pages|length != 1 %}s{% endif %} found</p>
+                <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-outline-secondary active" onclick="setView('grid')">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setView('list')">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid View -->
+    <div id="gridView" class="row">
+        {% for page in pages %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ page.title }}</h5>
+                    <p class="card-text text-muted">
+                        <small>
+                            <i class="fas fa-calendar me-1"></i>
+                            Created {{ page.created_at.strftime('%B %d, %Y') }}
+                        </small>
+                    </p>
+                    <p class="card-text text-muted">
+                        <small>
+                            <i class="fas fa-file-code me-1"></i>
+                            {{ page.filename }}
+                        </small>
+                    </p>
+                    {% if page.updated_at != page.created_at %}
+                    <p class="card-text text-muted">
+                        <small>
+                            <i class="fas fa-edit me-1"></i>
+                            Updated {{ page.updated_at.strftime('%B %d, %Y') }}
+                        </small>
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="btn-group w-100">
+                        <a href="{{ url_for('main.preview', page_id=page.id) }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-eye me-1"></i>Preview
+                        </a>
+                        <a href="{{ url_for('main.view_page', page_id=page.id) }}" class="btn btn-outline-secondary btn-sm" target="_blank">
+                            <i class="fas fa-external-link-alt me-1"></i>View
+                        </a>
+                        <a href="{{ url_for('main.edit_page', page_id=page.id) }}" class="btn btn-outline-info btn-sm">
+                            <i class="fas fa-edit me-1"></i>Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- List View -->
+    <div id="listView" class="d-none">
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Filename</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for page in pages %}
+                        <tr>
+                            <td>
+                                <strong>{{ page.title }}</strong>
+                            </td>
+                            <td>
+                                <code>{{ page.filename }}</code>
+                            </td>
+                            <td>
+                                {{ page.created_at.strftime('%m/%d/%Y %I:%M %p') }}
+                            </td>
+                            <td>
+                                {% if page.updated_at != page.created_at %}
+                                    {{ page.updated_at.strftime('%m/%d/%Y %I:%M %p') }}
+                                {% else %}
+                                    <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="{{ url_for('main.preview', page_id=page.id) }}" class="btn btn-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ url_for('main.view_page', page_id=page.id) }}" class="btn btn-outline-secondary" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="{{ url_for('main.edit_page', page_id=page.id) }}" class="btn btn-outline-info">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger" onclick="confirmDelete({{ page.id }}, '{{ page.title }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+            <div class="py-5">
+                <i class="fas fa-folder-open fa-4x text-muted mb-4"></i>
+                <h3 class="fw-bold mb-3">No pages yet</h3>
+                <p class="text-muted mb-4">You haven't created any webpages yet. Get started by creating your first page!</p>
+                <a href="{{ url_for('main.editor') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus me-2"></i>Create Your First Page
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the page "<strong id="deletePageTitle"></strong>"?</p>
+                <p class="text-danger mb-0">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Delete Page</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function setView(viewType) {
+    const gridView = document.getElementById('gridView');
+    const listView = document.getElementById('listView');
+    const buttons = document.querySelectorAll('.btn-group .btn');
+    
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    if (viewType === 'grid') {
+        gridView.classList.remove('d-none');
+        listView.classList.add('d-none');
+        buttons[0].classList.add('active');
+    } else {
+        gridView.classList.add('d-none');
+        listView.classList.remove('d-none');
+        buttons[1].classList.add('active');
+    }
+}
+
+function confirmDelete(pageId, pageTitle) {
+    document.getElementById('deletePageTitle').textContent = pageTitle;
+    document.getElementById('deleteForm').action = `/delete/${pageId}`;
+    
+    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    modal.show();
+}
+</script>
+{% endblock %}

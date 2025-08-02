@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}Code Editor - HTML Generator{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="fw-bold mb-0">
+                    <i class="fas fa-edit me-2"></i>
+                    {% if page %}Edit Page: {{ page.title }}{% else %}Create New Page{% endif %}
+                </h2>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-secondary" onclick="loadExample()">
+                        <i class="fas fa-lightbulb me-1"></i>Load Example
+                    </button>
+                    <button type="button" class="btn btn-outline-info" onclick="showDocs()">
+                        <i class="fas fa-question-circle me-1"></i>Help
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('main.generate_page') }}" id="codeForm">
+        <div class="row">
+            <!-- Code Editor -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Python Code</h5>
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-primary" onclick="formatCode()">
+                                    <i class="fas fa-magic me-1"></i>Format
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="clearCode()">
+                                    <i class="fas fa-trash me-1"></i>Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <textarea id="codeEditor" name="code" class="form-control">{% if page %}{{ page.code }}{% else %}# Create a new webpage
+page = Page("My Website", "Welcome to My Site")
+
+# Add content
+page.add_content(Heading("About Us", 2))
+page.add_content(Paragraph("This is a paragraph of text describing our website."))
+
+# Add a list
+skills = List(["Python", "Web Development", "Database Design"], ordered=False)
+skills.add_class("list-group list-group-flush")
+page.add_content(Heading("Our Skills", 3))
+page.add_content(skills)
+
+# Add a card
+card = Card("Featured Service", "We provide excellent web development services.")
+card.add_class("mt-4")
+page.add_content(card){% endif %}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings & Actions -->
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Page Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Page Title</label>
+                            <input type="text" class="form-control" id="title" name="title" 
+                                   value="{% if page %}{{ page.title }}{% else %}My New Page{% endif %}" required>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-play me-2"></i>Generate Page
+                            </button>
+                            {% if page %}
+                            <a href="{{ url_for('main.preview', page_id=page.id) }}" class="btn btn-outline-info">
+                                <i class="fas fa-eye me-2"></i>View Current
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentation Panel -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Quick Reference</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="accordion" id="docsAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#basicElements">
+                                        Basic Elements
+                                    </button>
+                                </h2>
+                                <div id="basicElements" class="accordion-collapse collapse" data-bs-parent="#docsAccordion">
+                                    <div class="accordion-body">
+                                        <code class="d-block mb-2">Page(title, header_text)</code>
+                                        <code class="d-block mb-2">Heading(text, level=1)</code>
+                                        <code class="d-block mb-2">Paragraph(text)</code>
+                                        <code class="d-block mb-2">List(items, ordered=False)</code>
+                                        <code class="d-block">Image(src, alt)</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#components">
+                                        Components
+                                    </button>
+                                </h2>
+                                <div id="components" class="accordion-collapse collapse" data-bs-parent="#docsAccordion">
+                                    <div class="accordion-body">
+                                        <code class="d-block mb-2">Card(title, body)</code>
+                                        <code class="d-block mb-2">Container(content, fluid=False)</code>
+                                        <code class="d-block mb-2">Div(content)</code>
+                                        <code class="d-block">Section(content)</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#methods">
+                                        Common Methods
+                                    </button>
+                                </h2>
+                                <div id="methods" class="accordion-collapse collapse" data-bs-parent="#docsAccordion">
+                                    <div class="accordion-body">
+                                        <code class="d-block mb-2">add_content(element)</code>
+                                        <code class="d-block mb-2">add_class(css_class)</code>
+                                        <code class="d-block mb-2">set_id(id_attr)</code>
+                                        <code class="d-block">render()</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Example Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Code Examples</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <button class="btn btn-outline-primary w-100" onclick="loadExampleCode('basic')">
+                            Basic Page
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <button class="btn btn-outline-primary w-100" onclick="loadExampleCode('navigation')">
+                            With Navigation
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <button class="btn btn-outline-primary w-100" onclick="loadExampleCode('cards')">
+                            Card Layout
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <button class="btn btn-outline-primary w-100" onclick="loadExampleCode('portfolio')">
+                            Portfolio Page
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+{% endblock %}

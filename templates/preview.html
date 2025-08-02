@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Preview: {{ page.title }} - HTML Generator{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="fw-bold mb-1">{{ page.title }}</h2>
+                    <p class="text-muted mb-0">
+                        Created {{ page.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                        {% if page.updated_at != page.created_at %}
+                        • Updated {{ page.updated_at.strftime('%B %d, %Y at %I:%M %p') }}
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="btn-group">
+                    <a href="{{ url_for('main.view_page', page_id=page.id) }}" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-external-link-alt me-1"></i>View Full Page
+                    </a>
+                    <a href="{{ url_for('main.edit_page', page_id=page.id) }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-edit me-1"></i>Edit
+                    </a>
+                    <button type="button" class="btn btn-outline-danger" onclick="deletePage({{ page.id }})">
+                        <i class="fas fa-trash me-1"></i>Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Preview Frame -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Live Preview</h5>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-outline-secondary" onclick="refreshPreview()">
+                                <i class="fas fa-sync-alt me-1"></i>Refresh
+                            </button>
+                            <button type="button" class="btn btn-outline-info" onclick="toggleResponsive()">
+                                <i class="fas fa-mobile-alt me-1"></i>Mobile View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="preview-container" id="previewContainer">
+                        <iframe id="previewFrame" src="{{ url_for('main.view_page', page_id=page.id) }}" 
+                                class="w-100 border-0" style="height: 600px;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code & Details -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Page Details</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <td><strong>Title:</strong></td>
+                            <td>{{ page.title }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Filename:</strong></td>
+                            <td><code>{{ page.filename }}</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Created:</strong></td>
+                            <td>{{ page.created_at.strftime('%m/%d/%Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Size:</strong></td>
+                            <td>{{ "%.1f"|format(page.html_content|length / 1024) }} KB</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Source Code</h5>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="copyCode()">
+                            <i class="fas fa-copy me-1"></i>Copy
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-dark text-light p-3 rounded" style="font-size: 0.85rem; max-height: 400px; overflow-y: auto;"><code id="sourceCode">{{ page.code }}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the page "<strong>{{ page.title }}</strong>"?</p>
+                <p class="text-danger mb-0">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="POST" action="{{ url_for('main.delete_page', page_id=page.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Delete Page</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function refreshPreview() {
+    document.getElementById('previewFrame').src = document.getElementById('previewFrame').src;
+}
+
+function toggleResponsive() {
+    const frame = document.getElementById('previewFrame');
+    const container = document.getElementById('previewContainer');
+    
+    if (frame.style.width === '375px') {
+        frame.style.width = '100%';
+        frame.style.height = '600px';
+        container.classList.remove('text-center');
+    } else {
+        frame.style.width = '375px';
+        frame.style.height = '667px';
+        container.classList.add('text-center');
+    }
+}
+
+function copyCode() {
+    const code = document.getElementById('sourceCode').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+        // Show temporary success message
+        const btn = event.target.closest('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+        btn.classList.remove('btn-outline-secondary');
+        btn.classList.add('btn-success');
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-secondary');
+        }, 2000);
+    });
+}
+
+function deletePage(pageId) {
+    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    modal.show();
+}
+</script>
+{% endblock %}

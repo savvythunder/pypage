@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}Examples - HTML Generator{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h2 class="fw-bold mb-1">Code Examples</h2>
+            <p class="text-muted mb-0">Learn how to use the HTML Generator library with these examples</p>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for example in examples %}
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">{{ example.title }}</h5>
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="copyExample({{ loop.index0 }})">
+                            <i class="fas fa-copy me-1"></i>Copy
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-dark text-light p-3 rounded" style="font-size: 0.85rem; max-height: 300px; overflow-y: auto;"><code id="example-{{ loop.index0 }}">{{ example.code }}</code></pre>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('main.editor') }}?example={{ loop.index0 }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit me-1"></i>Try This Example
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Additional Examples Section -->
+    <div class="row mt-5">
+        <div class="col-12 mb-4">
+            <h3 class="fw-bold">More Advanced Examples</h3>
+        </div>
+        
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Landing Page with Hero Section</h5>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-dark text-light p-3 rounded" style="font-size: 0.85rem; max-height: 300px; overflow-y: auto;"><code># Create a landing page with hero section
+page = Page("TechCorp", "Innovation at its finest")
+page.add_navbar([
+    {"url": "#home", "text": "Home"},
+    {"url": "#about", "text": "About"},
+    {"url": "#services", "text": "Services"},
+    {"url": "#contact", "text": "Contact"}
+])
+
+# Hero section
+hero = Container()
+hero.add_content(Heading("Welcome to the Future", 1))
+hero.add_content(Paragraph("We build amazing technology solutions."))
+hero.add_class("text-center py-5 bg-primary text-white")
+page.add_content(hero)
+
+# Features section
+features = Container()
+features.add_content(Heading("Our Features", 2))
+
+feature1 = Card("Fast Performance", "Lightning-fast applications.")
+feature2 = Card("Secure", "Enterprise-grade security.")
+feature3 = Card("Scalable", "Grows with your business.")
+
+features.add_content(feature1)
+features.add_content(feature2)
+features.add_content(feature3)
+page.add_content(features)</code></pre>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="copyAdvancedExample(0)">
+                        <i class="fas fa-copy me-1"></i>Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Contact Form Page</h5>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-dark text-light p-3 rounded" style="font-size: 0.85rem; max-height: 300px; overflow-y: auto;"><code># Create a contact form page
+from html_generator.forms import Form, Input, TextArea, Button
+
+page = Page("Contact Us", "Get In Touch")
+page.add_content(Heading("Contact Form", 2))
+
+# Create form with various input types
+contact_form = Form(action="/submit", method="POST")
+contact_form.add_class("w-50")
+
+name_input = Input("text", "name", label="Full Name")
+name_input.add_class("form-control")
+name_input.set_attribute("required", "required")
+
+email_input = Input("email", "email", label="Email Address")
+email_input.add_class("form-control")
+
+message_area = TextArea("message", label="Message", rows=5)
+message_area.add_class("form-control")
+
+submit_btn = Button("Send Message", "submit")
+submit_btn.add_class("btn-lg")
+
+contact_form.add_field(name_input)
+contact_form.add_field(email_input)
+contact_form.add_field(message_area)
+contact_form.add_field(submit_btn)
+
+page.add_content(contact_form)</code></pre>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="copyAdvancedExample(1)">
+                        <i class="fas fa-copy me-1"></i>Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Documentation</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">Page Class</h6>
+                            <ul class="list-unstyled">
+                                <li><code>Page(title, header_text)</code></li>
+                                <li><code>.add_content(element)</code></li>
+                                <li><code>.add_navbar(links)</code></li>
+                                <li><code>.generate_html()</code></li>
+                                <li><code>.save_to_file(filename)</code></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">Basic Elements</h6>
+                            <ul class="list-unstyled">
+                                <li><code>Heading(text, level)</code></li>
+                                <li><code>Paragraph(text)</code></li>
+                                <li><code>List(items, ordered)</code></li>
+                                <li><code>Image(src, alt)</code></li>
+                                <li><code>Link(text, href)</code></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">Components</h6>
+                            <ul class="list-unstyled">
+                                <li><code>Card(title, body)</code></li>
+                                <li><code>Container(content)</code></li>
+                                <li><code>Div(content)</code></li>
+                                <li><code>Section(content)</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function copyExample(index) {
+    const code = document.getElementById('example-' + index).textContent;
+    navigator.clipboard.writeText(code).then(() => {
+        showCopySuccess(event.target);
+    });
+}
+
+function copyAdvancedExample(index) {
+    const examples = [
+        `# Create a landing page with hero section
+page = Page("TechCorp", "Innovation at its finest")
+page.add_navbar([
+    {"url": "#home", "text": "Home"},
+    {"url": "#about", "text": "About"},
+    {"url": "#services", "text": "Services"},
+    {"url": "#contact", "text": "Contact"}
+])
+
+# Hero section
+hero = Container()
+hero.add_content(Heading("Welcome to the Future", 1))
+hero.add_content(Paragraph("We build amazing technology solutions."))
+hero.add_class("text-center py-5 bg-primary text-white")
+page.add_content(hero)
+
+# Features section
+features = Container()
+features.add_content(Heading("Our Features", 2))
+
+feature1 = Card("Fast Performance", "Lightning-fast applications.")
+feature2 = Card("Secure", "Enterprise-grade security.")
+feature3 = Card("Scalable", "Grows with your business.")
+
+features.add_content(feature1)
+features.add_content(feature2)
+features.add_content(feature3)
+page.add_content(features)`,
+        `# Create a contact form page
+from html_generator.forms import Form, Input, TextArea, Button
+
+page = Page("Contact Us", "Get In Touch")
+page.add_content(Heading("Contact Form", 2))
+
+# Create form with various input types
+contact_form = Form(action="/submit", method="POST")
+contact_form.add_class("w-50")
+
+name_input = Input("text", "name", label="Full Name")
+name_input.add_class("form-control")
+name_input.set_attribute("required", "required")
+
+email_input = Input("email", "email", label="Email Address")
+email_input.add_class("form-control")
+
+message_area = TextArea("message", label="Message", rows=5)
+message_area.add_class("form-control")
+
+submit_btn = Button("Send Message", "submit")
+submit_btn.add_class("btn-lg")
+
+contact_form.add_field(name_input)
+contact_form.add_field(email_input)
+contact_form.add_field(message_area)
+contact_form.add_field(submit_btn)
+
+page.add_content(contact_form)`
+    ];
+    
+    navigator.clipboard.writeText(examples[index]).then(() => {
+        showCopySuccess(event.target);
+    });
+}
+
+function showCopySuccess(button) {
+    const originalText = button.innerHTML;
+    button.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+    button.classList.remove('btn-outline-primary');
+    button.classList.add('btn-success');
+    
+    setTimeout(() => {
+        button.innerHTML = originalText;
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+    }, 2000);
+}
+</script>
+{% endblock %}

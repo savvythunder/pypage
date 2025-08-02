@@ -1,0 +1,161 @@
+/* Custom styles for HTML Generator */
+
+.hero-section {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-info) 100%);
+}
+
+.code-preview {
+    border-left: 4px solid var(--bs-success);
+}
+
+.preview-container {
+    background: #f8f9fa;
+    border-radius: 0.375rem;
+}
+
+.preview-container iframe {
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+}
+
+/* Code editor styles */
+.CodeMirror {
+    height: 500px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.CodeMirror-gutters {
+    border-right: 1px solid #495057;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Button loading states */
+.btn-loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.btn-loading::after {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .CodeMirror {
+        height: 400px;
+    }
+    
+    .btn-group .btn {
+        font-size: 0.875rem;
+    }
+}
+
+/* Syntax highlighting improvements */
+pre code {
+    color: #e9ecef;
+}
+
+.text-success {
+    color: #20c997 !important;
+}
+
+/* Gallery view transitions */
+#gridView, #listView {
+    transition: opacity 0.3s ease;
+}
+
+/* Form styling */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Accordion improvements */
+.accordion-button:not(.collapsed) {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+.accordion-button:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Table improvements */
+.table-hover tbody tr:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.075);
+}
+
+/* Badge styles */
+.badge {
+    font-size: 0.75em;
+}
+
+/* Loading spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Toast notifications */
+.toast {
+    background-color: var(--bs-dark);
+    color: var(--bs-light);
+}
+
+/* Modal improvements */
+.modal-content {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* File upload areas */
+.file-upload-area {
+    border: 2px dashed var(--bs-border-color);
+    border-radius: 0.375rem;
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+.file-upload-area:hover {
+    border-color: var(--bs-primary);
+}
+
+.file-upload-area.drag-over {
+    border-color: var(--bs-success);
+    background-color: rgba(var(--bs-success-rgb), 0.1);
+}
