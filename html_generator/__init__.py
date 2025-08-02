@@ -29,6 +29,15 @@ from .templates import Template, Slot, TemplateManager, create_hero_template, cr
 from .components import (ComponentBase, HeroSection, FeatureCard, Navbar, Alert, Badge, 
                         ProgressBar, Accordion, Modal)
 
+# Professional UI Components
+from .advanced_components import Table, Tabs, Carousel, Breadcrumb, Pagination, Toast, Rating, Avatar
+
+# Data Visualization
+from .data_visualization import Chart, BarChart, LineChart, PieChart, DoughnutChart, Dashboard, SparklineChart, KPICard
+
+# Advanced Forms
+from .forms_advanced import FileUpload, DateTimePicker, FormWizard, FormValidation, SearchableSelect
+
 # New Features - Animations
 from .animations import FadeIn, SlideUp, AnimateOnScroll, Pulse, Animation
 
@@ -70,6 +79,16 @@ __all__ = [
     # Components
     'ComponentBase', 'HeroSection', 'FeatureCard', 'Navbar', 'Alert', 'Badge', 
     'ProgressBar', 'Accordion', 'Modal',
+    
+    # Professional UI Components
+    'Table', 'Tabs', 'Carousel', 'Breadcrumb', 'Pagination', 'Toast', 'Rating', 'Avatar',
+    
+    # Data Visualization
+    'Chart', 'BarChart', 'LineChart', 'PieChart', 'DoughnutChart', 'Dashboard', 
+    'SparklineChart', 'KPICard',
+    
+    # Advanced Forms
+    'FileUpload', 'DateTimePicker', 'FormWizard', 'FormValidation', 'SearchableSelect',
     
     # Animations
     'FadeIn', 'SlideUp', 'AnimateOnScroll', 'Pulse', 'Animation',
