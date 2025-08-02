@@ -1,0 +1,101 @@
+1. Form Support
+Add a Form class and basic inputs:
+
+Form(action, method)
+
+Input(type, name, value="", placeholder="")
+
+Button(text, type="submit")
+
+TextArea(name, rows, cols, placeholder="")
+
+Select(name, options, multiple=False)
+
+✅ Why: Every modern website needs forms.
+
+2. Layout System
+Let users define grid or flexbox-based layouts.
+
+Row(content)
+
+Column(content, width=None)
+
+Flex(content, direction="row")
+
+✅ Why: Layout is a constant need and people love declarative layout options.
+
+3. Style Customization
+Allow inline styles and CSS classes.
+
+Every element could optionally accept:
+
+style → string of CSS
+
+class_name → string or list
+
+✅ Why: Without this, your users are locked into predefined design.
+
+4. Templating or Slots
+Introduce a lightweight way to define reusable blocks (like Jinja partials):
+
+Template(name, content)
+
+Slot(name)
+
+Page.use_template(template, slot_map)
+
+✅ Why: Promotes reuse and DRY patterns.
+
+5. Component Inheritance or Extension
+Let users create their own components by extending base elements:
+
+python
+Copy
+Edit
+class HeroSection(Container):
+    def __init__(self, title, subtitle):
+        super().__init__([
+            Heading(title, level=1),
+            Paragraph(subtitle)
+        ])
+✅ Why: Power users will want to build their own abstractions.
+
+6. Built-in Themes or Stylesheets
+Provide a simple way to attach themes or external CSS (like Bootstrap, Tailwind, or your own minimal one):
+
+Page.set_theme("bootstrap")
+
+Or accept custom_css="url" on init.
+
+✅ Why: Users want decent defaults without styling from scratch.
+
+7. JavaScript Hooks & Events
+Even if JS is predefined, allow components to specify:
+
+on_click, on_submit, etc.
+
+Or include inline script snippets.
+
+✅ Why: Adds interactivity.
+
+🧠 Advanced Ideas (Long-term)
+✅ Markdown support → Convert markdown to elements.
+
+✅ Code syntax highlighting blocks.
+
+✅ Live preview server (dev_server() function using Flask or similar).
+
+✅ SEO metadata → Support for <meta>, Open Graph, etc.
+
+✅ Analytics/Script plugins (e.g., add_script('ga.js'))
+
+✅ HTML minification/compression on export.
+
+✅ Dark mode toggle support via classes or JavaScript.
+
+📦 Organizational Improvements
+Plugin system: Allow community-contributed components.
+
+Element registry: Dynamically add new element types via decorators.
+
+CLI: A command-line tool to scaffold a project or preview pages.
