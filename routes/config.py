@@ -8,7 +8,7 @@ config_bp = Blueprint('config', __name__)
 @config_bp.route('/navbar-config')
 def navbar_config():
     """Show the navbar configuration interface"""
-    return render_template('navbar_config.html')
+    return render_template('../tools/web_interface/navbar_config.html')
 
 @config_bp.route('/navbar-config/preview', methods=['POST'])
 def navbar_preview():
@@ -111,7 +111,7 @@ page.run()
 @config_bp.route('/css-builder')
 def css_builder():
     """Show the CSS builder interface"""
-    return render_template('css_builder.html')
+    return render_template('../tools/web_interface/css_builder.html')
 
 @config_bp.route('/css-builder/generate', methods=['POST'])
 def generate_css():
