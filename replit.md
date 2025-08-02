@@ -21,6 +21,16 @@ This is a Flask-based web application that provides a Python HTML generator libr
   - Advanced components: Alert, Badge, ProgressBar, Accordion, Modal, enhanced Navbar
   - Comprehensive example file and documentation guide
 
+- **HTML Generator v3.0 Release (August 2, 2025)**: Major version upgrade with advanced features:
+  - **Dark Mode Support**: Complete dark mode system with DarkModeToggle component, system preference detection, and CSS custom properties
+  - **Animation Framework**: FadeIn, SlideUp, AnimateOnScroll, and Pulse components with customizable timing and easing
+  - **Visual Debug Mode**: Developer tools with page.enable_debug_view(), component boundaries, tooltips, and keyboard shortcuts (Ctrl+Shift+D)
+  - **Plugin System**: Extensible architecture with @register_component, @register_template, @register_hook, and @register_filter decorators
+  - **Export Capabilities**: JSON serialization (to_json/from_json) and PDF export (via weasyprint/pdfkit) with to_pdf() function
+  - **Plugin Components**: Timeline, StatCard, and CodeBlock components as examples of extensibility
+  - **Comprehensive Documentation**: Complete docs site at /docs with examples, API reference, and live demos
+  - **Enhanced Web Interface**: Updated web interface with documentation routes and feature showcases
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -57,6 +67,13 @@ Preferred communication style: Simple, everyday language.
 - **Modern Navigation**: Enhanced navbar system with dropdown support, mobile responsiveness, and custom branding
 - **Direct Execution**: page.run() method for instant browser preview and local development
 - **Advanced CSS Builder**: Method chaining CSS creation with responsive breakpoint management
+- **Dark Mode System**: DarkModeToggle component with system preference detection, persistent storage, and CSS custom properties
+- **Animation Framework**: FadeIn, SlideUp, AnimateOnScroll, and Pulse components with customizable timing, duration, and easing functions
+- **Visual Debug Tools**: page.enable_debug_view() method with component boundaries, tooltips, keyboard shortcuts (Ctrl+Shift+D), and debug panel
+- **Plugin Architecture**: Extensible system with @register_component, @register_template, @register_hook, and @register_filter decorators
+- **Export Capabilities**: JSON serialization with to_json()/from_json() methods and PDF export via to_pdf() function (weasyprint/pdfkit support)
+- **Plugin Components**: Built-in Timeline, StatCard, and CodeBlock components demonstrating extensibility
+- **SerializableMixin**: Component serialization support with to_dict()/from_dict() methods for data persistence
 
 ### Data Storage Solutions
 - **Database**: SQLAlchemy ORM with SQLite default (configurable via DATABASE_URL)

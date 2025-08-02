@@ -681,6 +681,26 @@ class Page:
             print(f"HTML file created: {temp_file.name}")
         
         return temp_file.name
+    
+    def enable_debug_view(self, show_boundaries: bool = True, show_component_names: bool = True,
+                         show_ids: bool = True, show_tooltips: bool = True):
+        """Enable visual debug mode for development"""
+        from .debug_tools import enable_debug_view, get_debug_css, get_debug_js
+        
+        # Enable debug mode
+        enable_debug_view(show_boundaries, show_component_names, show_ids, show_tooltips)
+        
+        # Add debug CSS and JS to the page
+        debug_css = get_debug_css()
+        debug_js = get_debug_js()
+        
+        if debug_css:
+            self.add_css(debug_css)
+        if debug_js:
+            self.add_js(debug_js)
+        
+        print("Debug mode enabled! Use Ctrl+Shift+D to toggle debug view in browser.")
+        return self
 
 class Heading:
     def __init__(self, text: str, level: int = 1, css_class: Optional[str] = None, 
