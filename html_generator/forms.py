@@ -54,11 +54,14 @@ class TextArea(Element):
     """Textarea element"""
     
     def __init__(self, name: str = "", value: str = "", placeholder: str = "",
-                 rows: int = 3, required: bool = False, css_class: Optional[str] = None,
-                 id_attr: Optional[str] = None, label: Optional[str] = None):
+                 rows: int = 3, cols: Optional[int] = None, required: bool = False, 
+                 css_class: Optional[str] = None, id_attr: Optional[str] = None, 
+                 label: Optional[str] = None):
         super().__init__("textarea", value, css_class=css_class, id_attr=id_attr)
         self.set_attribute("name", name)
         self.set_attribute("rows", str(rows))
+        if cols:
+            self.set_attribute("cols", str(cols))
         if placeholder:
             self.set_attribute("placeholder", placeholder)
         if required:
@@ -80,10 +83,12 @@ class Select(Element):
     """Select element"""
     
     def __init__(self, name: str = "", options: Optional[ListType[Dict[str, str]]] = None,
-                 required: bool = False, css_class: Optional[str] = None,
+                 multiple: bool = False, required: bool = False, css_class: Optional[str] = None,
                  id_attr: Optional[str] = None, label: Optional[str] = None):
         super().__init__("select", css_class=css_class, id_attr=id_attr)
         self.set_attribute("name", name)
+        if multiple:
+            self.set_attribute("multiple", "multiple")
         if required:
             self.set_attribute("required", "required")
         self.options = options if options is not None else []

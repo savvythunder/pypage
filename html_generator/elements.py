@@ -4,14 +4,20 @@ class Element:
     """Base class for all HTML elements"""
     
     def __init__(self, tag: str, content: str = "", attributes: Optional[Dict[str, str]] = None,
-                 css_class: Optional[str] = None, id_attr: Optional[str] = None):
+                 css_class: Optional[str] = None, id_attr: Optional[str] = None,
+                 style: Optional[str] = None, class_name: Optional[str] = None):
         self.tag = tag
         self.content = content
         self.attributes = attributes if attributes is not None else {}
-        if css_class:
-            self.attributes['class'] = css_class
+        
+        # Handle class_name parameter (alias for css_class)
+        final_class = class_name or css_class
+        if final_class:
+            self.attributes['class'] = final_class
         if id_attr:
             self.attributes['id'] = id_attr
+        if style:
+            self.attributes['style'] = style
 
     def set_attribute(self, name: str, value: str):
         """Set an attribute on the element"""
@@ -31,6 +37,44 @@ class Element:
         """Set the ID attribute"""
         self.attributes['id'] = id_attr
         return self
+    
+    def set_style(self, style: str):
+        """Set inline CSS styles"""
+        self.attributes['style'] = style
+        return self
+    
+    def add_style(self, style: str):
+        """Add to existing inline CSS styles"""
+        current_style = self.attributes.get('style', '')
+        if current_style:
+            # Add semicolon if not present
+            if not current_style.rstrip().endswith(';'):
+                current_style += '; '
+            else:
+                current_style += ' '
+        self.attributes['style'] = current_style + style
+        return self
+    
+    def set_event(self, event: str, handler: str):
+        """Set JavaScript event handler"""
+        self.attributes[event] = handler
+        return self
+    
+    def on_click(self, handler: str):
+        """Set onclick event handler"""
+        return self.set_event('onclick', handler)
+    
+    def on_submit(self, handler: str):
+        """Set onsubmit event handler"""
+        return self.set_event('onsubmit', handler)
+    
+    def on_change(self, handler: str):
+        """Set onchange event handler"""
+        return self.set_event('onchange', handler)
+    
+    def on_hover(self, handler: str):
+        """Set onmouseover event handler"""
+        return self.set_event('onmouseover', handler)
 
     def render_attributes(self):
         """Render HTML attributes"""

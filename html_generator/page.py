@@ -30,6 +30,9 @@ class Page:
             'mobile_responsive': True
         }
         
+        # Template manager
+        self.template_manager = None
+        
         # Set default CSS framework
         if css_framework == "bootstrap":
             self.add_css_link("https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css")
@@ -76,6 +79,38 @@ class Page:
             'dropdown_support': dropdown_support,
             'mobile_responsive': mobile_responsive
         })
+        return self
+
+    def set_theme(self, theme: str):
+        """Set a predefined theme for the page"""
+        # Clear existing CSS links that are theme-related
+        self.css_links = [link for link in self.css_links if 'bootstrap' not in link.lower()]
+        
+        if theme == "bootstrap":
+            self.add_css_link("https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css")
+        elif theme == "bootstrap-light":
+            self.add_css_link("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+        elif theme == "tailwind":
+            self.add_css_link("https://cdn.tailwindcss.com")
+        elif theme == "bulma":
+            self.add_css_link("https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css")
+        elif theme == "material":
+            self.add_css_link("https://fonts.googleapis.com/icon?family=Material+Icons")
+            self.add_css_link("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+            self.add_script("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")
+        
+        return self
+
+    def use_template_manager(self, template_manager):
+        """Set the template manager for this page"""
+        self.template_manager = template_manager
+        return self
+
+    def use_template(self, template_name: str, slot_map: Optional[Dict[str, str]] = None):
+        """Use a template with slot content"""
+        if self.template_manager:
+            template_content = self.template_manager.render_template(template_name, slot_map)
+            self.add_content(template_content)
         return self
 
     def add_content(self, content):
