@@ -59,6 +59,22 @@ from .export_tools import (
     ExportManager, SerializableMixin
 )
 
+# Modern UI Components
+from .ui_components import (
+    InteractiveChart, DataVisualization, AdvancedFormBuilder, 
+    MicroInteraction, AccessibilityChecker
+)
+
+# Performance Tools
+from .performance_tools import (
+    HotReloadManager, PerformanceProfiler, SEOOptimizer, CodeSplitter
+)
+
+# WebAssembly Integration
+from .webassembly_integration import (
+    WebAssemblyRenderer, ImageOptimizer, CriticalCSSExtractor
+)
+
 __version__ = "3.0.0"
 
 __all__ = [
@@ -105,5 +121,15 @@ __all__ = [
     
     # Export tools
     'to_dict', 'from_dict', 'to_json', 'from_json', 'to_pdf', 'check_pdf_support',
-    'ExportManager', 'SerializableMixin'
+    'ExportManager', 'SerializableMixin',
+    
+    # Modern UI Components
+    'InteractiveChart', 'DataVisualization', 'AdvancedFormBuilder', 
+    'MicroInteraction', 'AccessibilityChecker',
+    
+    # Performance Tools
+    'HotReloadManager', 'PerformanceProfiler', 'SEOOptimizer', 'CodeSplitter',
+    
+    # WebAssembly Integration
+    'WebAssemblyRenderer', 'ImageOptimizer', 'CriticalCSSExtractor'
 ]
