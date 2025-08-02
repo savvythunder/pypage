@@ -131,16 +131,72 @@ page.add_content(Paragraph("This is a simple webpage created with the HTML gener
 '''
         },
         {
-            'title': 'Page with Navigation',
-            'code': '''# Create a page with navigation
-page = Page("My Blog", "John's Blog")
-page.add_navbar([
+            'title': 'Modern Navigation Bar',
+            'code': '''# Create a page with modern navigation
+page = Page("My Blog", "John's Blog", use_modern_navbar=True)
+
+# Configure the navbar brand
+page.configure_navbar(
+    brand_name="MyBrand",
+    brand_icon="🚀",
+    style="modern"
+)
+
+# Add navigation links with dropdown
+nav_links = [
     {"url": "/", "text": "Home"},
     {"url": "/about", "text": "About"},
+    {
+        "url": "/services", 
+        "text": "Services",
+        "dropdown": [
+            {"url": "/web-dev", "text": "Web Development"},
+            {"url": "/mobile", "text": "Mobile Apps"}
+        ]
+    },
     {"url": "/contact", "text": "Contact"}
-])
-page.add_content(Heading("Latest Posts", 2))
-page.add_content(Paragraph("Welcome to my blog where I share my thoughts and experiences."))
+]
+page.add_navbar(nav_links)
+page.add_content(Heading("Welcome to My Blog", 1))
+page.add_content(Paragraph("Experience the modern navigation bar with dropdown support and mobile responsiveness."))
+
+# Run the website directly
+page.run()
+'''
+        },
+        {
+            'title': 'Page with Enhanced CSS',
+            'code': '''# Create a page with custom CSS styling
+from html_generator.css import CSSBuilder, Style
+
+page = Page("Styled Page", "Beautiful Design")
+
+# Create custom CSS using the CSS builder
+css_builder = CSSBuilder()
+css_builder.add_rule(".custom-header", {
+    "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    "color": "white",
+    "padding": "2rem",
+    "border-radius": "10px",
+    "text-align": "center"
+})
+
+# Add responsive breakpoints
+css_builder.responsive_breakpoints(".custom-header",
+    sm={"font-size": "1.2rem"},
+    md={"font-size": "1.5rem"},
+    lg={"font-size": "2rem"}
+)
+
+# Apply the custom CSS
+page.custom_css = css_builder.render()
+
+# Add content
+page.add_content(Heading("Styled Header", 1, css_class="custom-header"))
+page.add_content(Paragraph("This header uses custom CSS with responsive design."))
+
+# Run the website
+page.run()
 '''
         },
         {

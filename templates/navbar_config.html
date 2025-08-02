@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+
+{% block title %}Navbar Configuration{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Configure Navigation Bar</h5>
+                </div>
+                <div class="card-body">
+                    <form id="navbarConfigForm">
+                        <!-- Brand Configuration -->
+                        <div class="mb-4">
+                            <h6 class="text-primary">Brand Settings</h6>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="brandName" class="form-label">Brand Name</label>
+                                    <input type="text" class="form-control" id="brandName" value="NexusLabs">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="brandIcon" class="form-label">Icon</label>
+                                    <input type="text" class="form-control" id="brandIcon" value="🌟">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Style Configuration -->
+                        <div class="mb-4">
+                            <h6 class="text-primary">Style</h6>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="navStyle" id="styleModern" value="modern" checked>
+                                <label class="form-check-label" for="styleModern">Modern</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="navStyle" id="styleBasic" value="basic">
+                                <label class="form-check-label" for="styleBasic">Basic</label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Links -->
+                        <div class="mb-4">
+                            <h6 class="text-primary">Navigation Links</h6>
+                            <div id="navLinksContainer">
+                                <!-- Dynamic nav links will be added here -->
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="addNavLink()">
+                                <i class="fas fa-plus"></i> Add Link
+                            </button>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary" onclick="previewNavbar()">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="generateCode()">
+                                <i class="fas fa-code"></i> Generate Code
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <!-- Preview Panel -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Live Preview</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div id="navbarPreview" style="min-height: 200px;">
+                        <div class="text-center text-muted p-4">
+                            Click "Preview" to see your navbar
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated Code Panel -->
+            <div class="card mt-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Generated Python Code</h5>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="copyCode()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="card-body p-0">
+                    <pre id="generatedCode" class="bg-dark text-light p-3 m-0" style="min-height: 200px; font-size: 0.9rem;">
+Click "Generate Code" to see the Python code for your navbar configuration
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nav Link Template -->
+<template id="navLinkTemplate">
+    <div class="nav-link-item border rounded p-3 mb-3">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <label class="form-label">Link Text</label>
+                <input type="text" class="form-control nav-link-text" placeholder="Link Text">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">URL</label>
+                <input type="text" class="form-control nav-link-url" placeholder="#" value="#">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Type</label>
+                <select class="form-select nav-link-type" onchange="toggleDropdown(this)">
+                    <option value="regular">Regular</option>
+                    <option value="dropdown">Dropdown</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">&nbsp;</label>
+                <button type="button" class="btn btn-outline-danger btn-sm d-block" onclick="removeNavLink(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="dropdown-items mt-3" style="display: none;">
+            <h6 class="text-secondary">Dropdown Items</h6>
+            <div class="dropdown-items-container"></div>
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="addDropdownItem(this)">
+                <i class="fas fa-plus"></i> Add Dropdown Item
+            </button>
+        </div>
+    </div>
+</template>
+
+<!-- Dropdown Item Template -->
+<template id="dropdownItemTemplate">
+    <div class="dropdown-item-row row align-items-center mb-2">
+        <div class="col-5">
+            <input type="text" class="form-control dropdown-item-text" placeholder="Item Text">
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control dropdown-item-url" placeholder="#" value="#">
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeDropdownItem(this)">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+</template>
+
+<style>
+#navbarPreview {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.nav-link-item {
+    background: rgba(var(--bs-info-rgb), 0.1);
+    border-color: rgba(var(--bs-info-rgb), 0.2) !important;
+}
+
+#generatedCode {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+</style>
+
+<script>
+let navLinkCounter = 0;
+
+function addNavLink() {
+    const template = document.getElementById('navLinkTemplate');
+    const clone = template.content.cloneNode(true);
+    
+    // Set unique ID for this nav link
+    clone.querySelector('.nav-link-item').setAttribute('data-id', navLinkCounter++);
+    
+    document.getElementById('navLinksContainer').appendChild(clone);
+}
+
+function removeNavLink(button) {
+    button.closest('.nav-link-item').remove();
+}
+
+function toggleDropdown(select) {
+    const dropdownDiv = select.closest('.nav-link-item').querySelector('.dropdown-items');
+    if (select.value === 'dropdown') {
+        dropdownDiv.style.display = 'block';
+    } else {
+        dropdownDiv.style.display = 'none';
+    }
+}
+
+function addDropdownItem(button) {
+    const template = document.getElementById('dropdownItemTemplate');
+    const clone = template.content.cloneNode(true);
+    
+    const container = button.closest('.dropdown-items').querySelector('.dropdown-items-container');
+    container.appendChild(clone);
+}
+
+function removeDropdownItem(button) {
+    button.closest('.dropdown-item-row').remove();
+}
+
+function getNavbarConfig() {
+    const brandName = document.getElementById('brandName').value;
+    const brandIcon = document.getElementById('brandIcon').value;
+    const style = document.querySelector('input[name="navStyle"]:checked').value;
+    
+    const navLinks = [];
+    document.querySelectorAll('.nav-link-item').forEach(item => {
+        const text = item.querySelector('.nav-link-text').value;
+        const url = item.querySelector('.nav-link-url').value;
+        const type = item.querySelector('.nav-link-type').value;
+        
+        if (!text) return;
+        
+        const link = { text, url };
+        
+        if (type === 'dropdown') {
+            const dropdownItems = [];
+            item.querySelectorAll('.dropdown-item-row').forEach(dropdownRow => {
+                const dropdownText = dropdownRow.querySelector('.dropdown-item-text').value;
+                const dropdownUrl = dropdownRow.querySelector('.dropdown-item-url').value;
+                
+                if (dropdownText) {
+                    dropdownItems.push({ text: dropdownText, url: dropdownUrl });
+                }
+            });
+            
+            if (dropdownItems.length > 0) {
+                link.dropdown = dropdownItems;
+            }
+        }
+        
+        navLinks.push(link);
+    });
+    
+    return {
+        brand_name: brandName,
+        brand_icon: brandIcon,
+        style: style,
+        nav_links: navLinks
+    };
+}
+
+function previewNavbar() {
+    const config = getNavbarConfig();
+    
+    fetch('/navbar-config/preview', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(config)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const previewDiv = document.getElementById('navbarPreview');
+            previewDiv.innerHTML = `
+                <style>${data.navbar_css}</style>
+                ${data.navbar_html}
+            `;
+        } else {
+            alert('Error generating preview: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error generating preview');
+    });
+}
+
+function generateCode() {
+    const config = getNavbarConfig();
+    
+    fetch('/navbar-config/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(config)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('generatedCode').textContent = data.python_code;
+        } else {
+            alert('Error generating code: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error generating code');
+    });
+}
+
+function copyCode() {
+    const code = document.getElementById('generatedCode').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+        // Show temporary success message
+        const button = event.target.closest('button');
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+            button.innerHTML = originalText;
+        }, 2000);
+    });
+}
+
+// Initialize with some default links
+document.addEventListener('DOMContentLoaded', function() {
+    addNavLink();
+    const firstLink = document.querySelector('.nav-link-text');
+    if (firstLink) {
+        firstLink.value = 'Home';
+    }
+    
+    addNavLink();
+    const links = document.querySelectorAll('.nav-link-text');
+    if (links[1]) {
+        links[1].value = 'About';
+    }
+    
+    addNavLink();
+    if (links[2]) {
+        const thirdItem = links[2].closest('.nav-link-item');
+        thirdItem.querySelector('.nav-link-text').value = 'Services';
+        thirdItem.querySelector('.nav-link-type').value = 'dropdown';
+        toggleDropdown(thirdItem.querySelector('.nav-link-type'));
+        
+        // Add some dropdown items
+        const addDropdownBtn = thirdItem.querySelector('.dropdown-items button');
+        addDropdownItem(addDropdownBtn);
+        addDropdownItem(addDropdownBtn);
+        
+        const dropdownTexts = thirdItem.querySelectorAll('.dropdown-item-text');
+        dropdownTexts[0].value = 'Web Development';
+        dropdownTexts[1].value = 'Mobile Apps';
+    }
+});
+</script>
+{% endblock %}

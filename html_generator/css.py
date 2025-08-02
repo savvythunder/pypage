@@ -81,6 +81,66 @@ class Style:
         self.properties['font-size'] = value
         return self
 
+    def margin(self, value: str):
+        """Set margin property"""
+        self.properties['margin'] = value
+        return self
+
+    def padding(self, value: str):
+        """Set padding property"""
+        self.properties['padding'] = value
+        return self
+
+    def border(self, value: str):
+        """Set border property"""
+        self.properties['border'] = value
+        return self
+
+    def width(self, value: str):
+        """Set width property"""
+        self.properties['width'] = value
+        return self
+
+    def height(self, value: str):
+        """Set height property"""
+        self.properties['height'] = value
+        return self
+
+    def display(self, value: str):
+        """Set display property"""
+        self.properties['display'] = value
+        return self
+
+    def position(self, value: str):
+        """Set position property"""
+        self.properties['position'] = value
+        return self
+
+    def text_align(self, value: str):
+        """Set text-align property"""
+        self.properties['text-align'] = value
+        return self
+
+    def add_property(self, property_name: str, value: str):
+        """Add any CSS property"""
+        self.properties[property_name] = value
+        return self
+
+    def render(self):
+        """Render the style as CSS"""
+        css = f"{self.selector} {{\n"
+        for prop, value in self.properties.items():
+            css += f"    {prop}: {value};\n"
+        css += "}\n"
+        return css
+        self.properties['background-color'] = value
+        return self
+
+    def font_size(self, value: str):
+        """Set font-size property"""
+        self.properties['font-size'] = value
+        return self
+
     def font_weight(self, value: str):
         """Set font-weight property"""
         self.properties['font-weight'] = value

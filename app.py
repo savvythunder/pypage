@@ -37,9 +37,11 @@ with app.app_context():
 # Register blueprints
 from routes.main import main_bp
 from routes.api import api_bp
+from routes.config import config_bp
 
 app.register_blueprint(main_bp)
 app.register_blueprint(api_bp, url_prefix='/api')
+app.register_blueprint(config_bp)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

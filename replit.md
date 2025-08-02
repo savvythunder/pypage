@@ -2,7 +2,15 @@
 
 ## Overview
 
-This is a Flask-based web application that provides a Python HTML generator library with a web interface for creating, editing, and managing HTML pages programmatically. Users can write Python code to generate responsive web pages using an object-oriented approach, with components like Page, Heading, Paragraph, Lists, Images, and Forms. The application features a code editor with syntax highlighting, live preview functionality, and a gallery system for managing generated pages.
+This is a Flask-based web application that provides a Python HTML generator library with a web interface for creating, editing, and managing HTML pages programmatically. Users can write Python code to generate responsive web pages using an object-oriented approach, with components like Page, Heading, Paragraph, Lists, Images, and Forms. The application features a code editor with syntax highlighting, live preview functionality, a gallery system for managing generated pages, and now includes enhanced modern navigation bars, a page.run() method for direct execution, and visual configuration tools.
+
+## Recent Changes (August 2025)
+
+- **Added page.run() method**: Users can now run websites directly from Python code using `page.run()` which opens the generated HTML in a browser
+- **Enhanced Navigation Bar**: Implemented modern navigation bar with gradient styling, dropdown support, mobile responsiveness, and hamburger menu
+- **Configuration Web Interface**: Created visual tools for navbar configuration and CSS building accessible through the Tools menu
+- **Improved CSS Handling**: Enhanced CSS builder with responsive breakpoints, method chaining, and visual CSS rule editor
+- **Modern UI Components**: Added sticky navigation, scroll effects, and improved mobile experience
 
 ## User Preferences
 
@@ -19,10 +27,11 @@ Preferred communication style: Simple, everyday language.
 
 ### Backend Architecture
 - **Web Framework**: Flask with Blueprint-based route organization
-- **Route Structure**: Separated into main routes (web pages) and API routes (JSON endpoints)
+- **Route Structure**: Separated into main routes (web pages), API routes (JSON endpoints), and config routes (visual tools)
 - **Code Execution**: Safe Python code execution using exec() with controlled globals
-- **File Management**: Generated HTML files stored in `generated_pages` directory
+- **File Management**: Generated HTML files stored in `generated_pages` directory and temporary files for page.run()
 - **Session Management**: Flask sessions with configurable secret key
+- **Configuration Tools**: Visual navbar builder and CSS editor with live preview capabilities
 
 ### HTML Generator Library
 - **Object-Oriented Design**: Component-based architecture with base Element class
@@ -30,6 +39,9 @@ Preferred communication style: Simple, everyday language.
 - **Form System**: Dedicated form handling with Input, Button, Select, TextArea elements
 - **CSS Integration**: Built-in CSS framework support (Bootstrap) with custom styling options
 - **Responsive Features**: CSS builder with media query support and breakpoint helpers
+- **Modern Navigation**: Enhanced navbar system with dropdown support, mobile responsiveness, and custom branding
+- **Direct Execution**: page.run() method for instant browser preview and local development
+- **Advanced CSS Builder**: Method chaining CSS creation with responsive breakpoint management
 
 ### Data Storage Solutions
 - **Database**: SQLAlchemy ORM with SQLite default (configurable via DATABASE_URL)
