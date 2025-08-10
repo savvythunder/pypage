@@ -1,0 +1,57 @@
+<svg width="800" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Floating elements -->
+  <circle cx="100" cy="50" r="20" fill="rgba(255,255,255,0.1)" opacity="0.6"/>
+  <circle cx="700" cy="80" r="15" fill="rgba(255,255,255,0.1)" opacity="0.4"/>
+  <circle cx="750" cy="200" r="25" fill="rgba(255,255,255,0.1)" opacity="0.3"/>
+  <circle cx="50" cy="250" r="18" fill="rgba(255,255,255,0.1)" opacity="0.5"/>
+  
+  <!-- Code window mockup -->
+  <rect x="50" y="100" width="300" height="150" rx="8" fill="url(#cardGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <rect x="50" y="100" width="300" height="25" rx="8" fill="rgba(0,0,0,0.2)"/>
+  <circle cx="65" cy="112" r="4" fill="#ff5f57"/>
+  <circle cx="80" cy="112" r="4" fill="#ffbd2e"/>
+  <circle cx="95" cy="112" r="4" fill="#28ca42"/>
+  
+  <!-- Code text -->
+  <text x="60" y="145" font-family="Monaco, monospace" font-size="11" fill="rgba(255,255,255,0.9)">from pypage import *</text>
+  <text x="60" y="160" font-family="Monaco, monospace" font-size="11" fill="rgba(255,255,255,0.9)"></text>
+  <text x="60" y="175" font-family="Monaco, monospace" font-size="11" fill="rgba(255,255,255,0.9)">page = Page("My Site")</text>
+  <text x="60" y="190" font-family="Monaco, monospace" font-size="11" fill="rgba(255,255,255,0.9)">page.add_content(</text>
+  <text x="60" y="205" font-family="Monaco, monospace" font-size="11" fill="rgba(255,255,255,0.9)">  Card("Hello World!")</text>
+  <text x="60" y="220" font-family="Monaco, monospace" font-size="11" fill="rgba(255,255,255,0.9)">)</text>
+  <text x="60" y="235" font-family="Monaco, monospace" font-size="11" fill="rgba(255,255,255,0.9)">page.run()</text>
+  
+  <!-- Result preview -->
+  <rect x="400" y="100" width="350" height="150" rx="8" fill="rgba(255,255,255,0.95)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <rect x="400" y="100" width="350" height="25" rx="8" fill="rgba(248,249,250,1)"/>
+  <text x="415" y="118" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">localhost:8000</text>
+  
+  <!-- Result content -->
+  <rect x="420" y="140" width="310" height="80" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="430" y="160" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f2937">Hello World!</text>
+  <text x="430" y="180" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Beautiful, responsive card component</text>
+  <rect x="430" y="190" width="80" height="25" rx="4" fill="#3b82f6"/>
+  <text x="460" y="206" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">Learn More</text>
+  
+  <!-- Main title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Write Python. Get Beautiful HTML.
+  </text>
+  <text x="400" y="65" font-family="Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.9)" text-anchor="middle">
+    Modern web development with the power of Python
+  </text>
+</svg>

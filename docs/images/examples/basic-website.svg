@@ -1,0 +1,68 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#ffffff"/>
+  
+  <!-- Navigation bar -->
+  <rect width="800" height="60" fill="#343a40"/>
+  <text x="50" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Acme Digital</text>
+  <text x="650" y="35" font-family="Arial, sans-serif" font-size="14" fill="white">Home | Services | About | Contact</text>
+  
+  <!-- Hero section -->
+  <rect y="60" width="800" height="200" fill="url(#heroGradient)"/>
+  <text x="400" y="120" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="white">
+    Professional Web Solutions
+  </text>
+  <text x="400" y="150" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="rgba(255,255,255,0.8)">
+    We create stunning, responsive websites that drive results
+  </text>
+  <rect x="320" y="170" width="80" height="35" rx="4" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1"/>
+  <text x="360" y="190" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Get Started</text>
+  <rect x="420" y="170" width="80" height="35" rx="4" fill="transparent" stroke="white" stroke-width="1"/>
+  <text x="460" y="190" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">View Portfolio</text>
+  
+  <!-- Services section -->
+  <g transform="translate(0, 280)">
+    <text x="400" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">Our Services</text>
+    
+    <!-- Service cards -->
+    <rect x="100" y="50" width="180" height="120" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="190" y="80" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">🎨</text>
+    <text x="190" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Web Design</text>
+    <text x="190" y="125" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">Beautiful, modern designs</text>
+    <text x="190" y="140" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">that capture your brand</text>
+    
+    <rect x="310" y="50" width="180" height="120" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="400" y="80" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">⚡</text>
+    <text x="400" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Development</text>
+    <text x="400" y="125" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">Fast, secure, scalable</text>
+    <text x="400" y="140" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">web applications</text>
+    
+    <rect x="520" y="50" width="180" height="120" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="610" y="80" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">🚀</text>
+    <text x="610" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Optimization</text>
+    <text x="610" y="125" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">SEO optimization and</text>
+    <text x="610" y="140" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6c757d">performance tuning</text>
+  </g>
+  
+  <!-- Contact section -->
+  <g transform="translate(0, 480)">
+    <rect width="800" height="120" fill="#f8f9fa"/>
+    <text x="400" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">Get In Touch</text>
+    
+    <!-- Contact form mockup -->
+    <rect x="250" y="50" width="300" height="60" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="260" y="70" font-family="Arial, sans-serif" font-size="12" fill="#6c757d">Contact Form</text>
+    <rect x="260" y="75" width="100" height="15" rx="2" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+    <rect x="370" y="75" width="100" height="15" rx="2" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+    <rect x="480" y="75" width="60" height="15" rx="2" fill="#007bff"/>
+    <text x="510" y="86" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Send</text>
+  </g>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+</svg>

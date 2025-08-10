@@ -1,0 +1,20 @@
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="40" cy="40" r="35" fill="#3b82f6" opacity="0.1"/>
+  
+  <!-- Main logo icon -->
+  <rect x="20" y="25" width="40" height="30" rx="4" fill="#3b82f6"/>
+  <rect x="25" y="30" width="30" height="2" fill="white"/>
+  <rect x="25" y="35" width="25" height="2" fill="white"/>
+  <rect x="25" y="40" width="20" height="2" fill="white"/>
+  <rect x="25" y="45" width="15" height="2" fill="white"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="65" cy="25" r="2" fill="#10b981"/>
+  <circle cx="65" cy="35" r="2" fill="#f59e0b"/>
+  <circle cx="65" cy="45" r="2" fill="#ef4444"/>
+  
+  <!-- Text -->
+  <text x="85" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1f2937">PyPage</text>
+  <text x="85" y="50" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">HTML Generator</text>
+</svg>
