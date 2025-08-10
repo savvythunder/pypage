@@ -57,7 +57,7 @@
     <rect x="140" y="35" width="100" height="70" rx="4" fill="#ffffff" stroke="#7b1fa2" stroke-width="1"/>
     <text x="190" y="55" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#7b1fa2">Cards</text>
     <text x="190" y="68" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Content containers</text>
-    <text x="190" y="78" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Headers & footers</text>
+    <text x="190" y="78" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Headers &amp; footers</text>
     <text x="190" y="88" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Responsive design</text>
     
     <!-- Navigation -->
