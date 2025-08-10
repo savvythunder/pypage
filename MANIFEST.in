@@ -1,0 +1,30 @@
+# Include documentation
+include README.md
+include LICENSE
+include CHANGELOG.md
+
+# Include package configuration
+include pyproject.toml
+include setup.py
+
+# Include static assets
+recursive-include pypage/templates *.html
+recursive-include pypage/static *.css *.js *.png *.jpg *.gif *.svg
+
+# Include test files for source distributions
+recursive-include tests *.py
+recursive-include testing *.py *.md
+
+# Exclude development files
+exclude .gitignore
+exclude .pre-commit-config.yaml
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.orig
+recursive-exclude * *.rej
+recursive-exclude * .DS_Store
+
+# Exclude build artifacts
+prune build
+prune dist
+prune *.egg-info

@@ -1,13 +1,164 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "repl-nix-workspace"
-version = "0.1.0"
-description = "Add your description here"
-requires-python = ">=3.11"
+name = "pypage"
+version = "3.0.0"
+description = "Enhanced HTML Generator Library with advanced features"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "PyPage Development Team", email = "dev@pypage.org"}
+]
+maintainers = [
+    {name = "PyPage Development Team", email = "dev@pypage.org"}
+]
+keywords = [
+    "html", "generator", "web", "framework", "bootstrap", "css", 
+    "javascript", "components", "ui", "responsive", "dark-mode", 
+    "animations", "charts", "forms"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Topic :: Software Development :: Code Generators",
+    "Framework :: Flask",
+]
+requires-python = ">=3.8"
 dependencies = [
-    "email-validator>=2.2.0",
-    "flask>=3.1.1",
-    "flask-sqlalchemy>=3.1.1",
-    "gunicorn>=23.0.0",
-    "psycopg2-binary>=2.9.10",
-    "sqlalchemy>=2.0.42",
+    "flask>=2.0.0",
+    "flask-sqlalchemy>=3.0.0",
+    "sqlalchemy>=2.0.0",
+    "jinja2>=3.0.0",
+    "markupsafe>=2.0.0",
+    "build>=1.2.2.post1",
+    "twine>=6.1.0",
+    "setuptools>=75.3.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+pdf = [
+    "weasyprint>=60.0",
+    "reportlab>=4.0.0",
+]
+charts = [
+    "plotly>=5.0.0",
+    "matplotlib>=3.5.0",
+]
+full = [
+    "weasyprint>=60.0",
+    "reportlab>=4.0.0",
+    "plotly>=5.0.0",
+    "matplotlib>=3.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/pypage/pypage"
+Documentation = "https://docs.pypage.org"
+Repository = "https://github.com/pypage/pypage"
+"Bug Tracker" = "https://github.com/pypage/pypage/issues"
+Changelog = "https://github.com/pypage/pypage/blob/main/CHANGELOG.md"
+
+[project.scripts]
+pypage = "pypage.cli:main"
+
+[tool.setuptools]
+packages = ["pypage"]
+
+[tool.setuptools.package-data]
+pypage = [
+    "templates/*.html",
+    "static/css/*.css", 
+    "static/js/*.js",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \\.eggs
+  | \\.git
+  | \\.hg
+  | \\.mypy_cache
+  | \\.tox
+  | \\.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+
+[tool.coverage.run]
+source = ["pypage"]
+omit = [
+    "*/tests/*",
+    "*/testing/*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
 ]
