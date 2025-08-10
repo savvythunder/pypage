@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from html_generator import Page, Heading, Paragraph, HtmlList, Image, Card, Container
+from pypage import Page, Heading, Paragraph, HtmlList, Image, Card, Container
 from models import GeneratedPage, db
 import uuid
 import re

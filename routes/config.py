@@ -23,7 +23,7 @@ def navbar_preview():
         style = config_data.get('style', 'modern')
         
         # Create a temporary page object to generate navbar
-        from html_generator.page import Page
+        from pypage.page import Page
         temp_page = Page("Preview", "Header", use_modern_navbar=(style == 'modern'))
         temp_page.configure_navbar(brand_name=brand_name, brand_icon=brand_icon)
         temp_page.nav_links = nav_links
@@ -119,7 +119,7 @@ def generate_css():
     try:
         css_data = request.get_json()
         
-        from html_generator.css import CSSBuilder
+        from pypage.css import CSSBuilder
         
         css_builder = CSSBuilder()
         

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 import os
-from html_generator import Page, Heading, Paragraph, HtmlList, Image, Card, Container
+from pypage import Page, Heading, Paragraph, HtmlList, Image, Card, Container
 from models import GeneratedPage, db
 import uuid
 import re
@@ -167,7 +167,7 @@ page.run()
         {
             'title': 'Page with Enhanced CSS',
             'code': '''# Create a page with custom CSS styling
-from html_generator.css import CSSBuilder, Style
+from pypage.css import CSSBuilder, Style
 
 page = Page("Styled Page", "Beautiful Design")
 
