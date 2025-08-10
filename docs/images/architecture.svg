@@ -75,7 +75,7 @@
     <text x="430" y="88" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Interactive content</text>
     
     <!-- Tables -->
-    <rect x="500" y="35" width="100" height="70" rx="4" fill="#ffffff" stroke="#7b1fa2" stroke-width="1"/>
+    <rect x="380" y="35" width="100" height="70" rx="4" fill="#ffffff" stroke="#7b1fa2" stroke-width="1"/>
     <text x="550" y="55" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#7b1fa2">Tables</text>
     <text x="550" y="68" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Data display</text>
     <text x="550" y="78" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Sorting</text>
