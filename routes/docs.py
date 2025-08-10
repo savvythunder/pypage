@@ -2,7 +2,7 @@
 Documentation routes for the HTML generator web interface
 """
 from flask import Blueprint, render_template, jsonify
-from pypage import *
+from src.pypage import *
 
 docs_bp = Blueprint('docs', __name__, url_prefix='/docs')
 
@@ -53,7 +53,7 @@ def documentation_home():
                 'Image, Link - Media and navigation',
                 'Card - Content cards with styling'
             ], list_type='ul', css_class='mb-3'),
-            CodeBlock('''from pypage import *
+            CodeBlock('''from src.pypage import *
 
 page = Page('My Site', 'Welcome')
 page.set_theme('bootstrap')
@@ -351,7 +351,7 @@ trigger.set_attribute('data-bs-target', '#demo-modal')''', language='python')
         Heading('Quick Start Guide', 3, css_class='card-title'),
         Paragraph('Get up and running in minutes:', css_class='card-text'),
         CodeBlock('''# 1. Import the library
-from pypage import *
+from src.pypage import *
 
 # 2. Create a page with theme
 page = Page('My Amazing Site', 'Welcome to the Future')

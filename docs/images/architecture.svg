@@ -1,0 +1,62 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#0f1419"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#fff">
+    PyPage Architecture
+  </text>
+  
+  <!-- Core Layer -->
+  <rect x="50" y="80" width="700" height="120" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <text x="60" y="105" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#60a5fa">Core Components</text>
+  <text x="60" y="130" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Page • Container • Element • Component Base</text>
+  <text x="60" y="150" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">CSS Builder • Theme System • Animation Framework</text>
+  <text x="60" y="170" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Dark Mode • Responsive Design • Plugin System</text>
+  
+  <!-- UI Components Layer -->
+  <rect x="50" y="220" width="340" height="120" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <text x="60" y="245" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#34d399">UI Components</text>
+  <text x="60" y="270" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Heading • Paragraph • Button</text>
+  <text x="60" y="290" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Card • Modal • Alert • Badge</text>
+  <text x="60" y="310" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Navbar • Table • Tabs</text>
+  <text x="60" y="330" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">ProgressBar • Accordion</text>
+  
+  <!-- Layout System -->
+  <rect x="410" y="220" width="340" height="120" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="420" y="245" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fbbf24">Layout System</text>
+  <text x="420" y="270" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Row • Column • Flex</text>
+  <text x="420" y="290" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Grid System • Bootstrap Integration</text>
+  <text x="420" y="310" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Responsive Breakpoints</text>
+  <text x="420" y="330" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Mobile-First Design</text>
+  
+  <!-- Forms Layer -->
+  <rect x="50" y="360" width="230" height="120" rx="10" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="60" y="385" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#a78bfa">Forms & Input</text>
+  <text x="60" y="410" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Form • Input • TextArea</text>
+  <text x="60" y="430" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Select • Checkbox • Radio</text>
+  <text x="60" y="450" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">File Upload • Validation</text>
+  <text x="60" y="470" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Advanced Form Builder</text>
+  
+  <!-- Data Visualization -->
+  <rect x="300" y="360" width="230" height="120" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+  <text x="310" y="385" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#f87171">Data Visualization</text>
+  <text x="310" y="410" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Charts • Graphs • KPI Cards</text>
+  <text x="310" y="430" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Bar • Line • Pie • Doughnut</text>
+  <text x="310" y="450" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Interactive Charts</text>
+  <text x="310" y="470" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Chart.js Integration</text>
+  
+  <!-- Export Tools -->
+  <rect x="550" y="360" width="200" height="120" rx="10" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
+  <text x="560" y="385" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#22d3ee">Export & Tools</text>
+  <text x="560" y="410" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">PDF Export</text>
+  <text x="560" y="430" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">JSON Serialization</text>
+  <text x="560" y="450" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">CLI Tools</text>
+  <text x="560" y="470" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Debug Tools</text>
+  
+  <!-- Performance Layer -->
+  <rect x="50" y="500" width="700" height="80" rx="10" fill="#1e293b" stroke="#f97316" stroke-width="2"/>
+  <text x="60" y="525" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fb923c">Performance & Integration</text>
+  <text x="60" y="550" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Hot Reload • Performance Profiler • SEO Optimizer • WebAssembly Integration</text>
+  <text x="60" y="570" font-family="Arial, sans-serif" font-size="12" fill="#cbd5e1">Image Optimization • Critical CSS • Code Splitting • Flask Integration</text>
+</svg>

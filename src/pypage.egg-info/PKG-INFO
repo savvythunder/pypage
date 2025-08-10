@@ -1,3 +1,67 @@
+Metadata-Version: 2.4
+Name: pypage
+Version: 3.0.0
+Summary: Enhanced HTML Generator Library with advanced features
+Home-page: https://github.com/pypage/pypage
+Author: PyPage Development Team
+Author-email: PyPage Development Team <dev@pypage.org>
+Maintainer-email: PyPage Development Team <dev@pypage.org>
+License: MIT
+Project-URL: Homepage, https://github.com/pypage/pypage
+Project-URL: Documentation, https://docs.pypage.org
+Project-URL: Repository, https://github.com/pypage/pypage
+Project-URL: Bug Tracker, https://github.com/pypage/pypage/issues
+Project-URL: Changelog, https://github.com/pypage/pypage/blob/main/CHANGELOG.md
+Keywords: html,generator,web,framework,bootstrap,css,javascript,components,ui,responsive,dark-mode,animations,charts,forms
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: Markup :: HTML
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Framework :: Flask
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: flask>=2.0.0
+Requires-Dist: flask-sqlalchemy>=3.0.0
+Requires-Dist: sqlalchemy>=2.0.0
+Requires-Dist: jinja2>=3.0.0
+Requires-Dist: markupsafe>=2.0.0
+Requires-Dist: build>=1.2.2.post1
+Requires-Dist: twine>=6.1.0
+Requires-Dist: setuptools>=75.3.2
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: flake8>=5.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: pre-commit>=3.0.0; extra == "dev"
+Provides-Extra: pdf
+Requires-Dist: weasyprint>=60.0; extra == "pdf"
+Requires-Dist: reportlab>=4.0.0; extra == "pdf"
+Provides-Extra: charts
+Requires-Dist: plotly>=5.0.0; extra == "charts"
+Requires-Dist: matplotlib>=3.5.0; extra == "charts"
+Provides-Extra: full
+Requires-Dist: weasyprint>=60.0; extra == "full"
+Requires-Dist: reportlab>=4.0.0; extra == "full"
+Requires-Dist: plotly>=5.0.0; extra == "full"
+Requires-Dist: matplotlib>=3.5.0; extra == "full"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
 # PyPage - Enhanced HTML Generator Library
 
 PyPage is a comprehensive Python library for generating HTML programmatically with advanced features including dark mode, animations, responsive design, and modern UI components.

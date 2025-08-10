@@ -8,7 +8,7 @@ config_bp = Blueprint('config', __name__)
 @config_bp.route('/navbar-config')
 def navbar_config():
     """Show the navbar configuration interface"""
-    return render_template('../tools/web_interface/navbar_config.html')
+    return render_template('config/navbar_config.html')
 
 @config_bp.route('/navbar-config/preview', methods=['POST'])
 def navbar_preview():
@@ -23,7 +23,7 @@ def navbar_preview():
         style = config_data.get('style', 'modern')
         
         # Create a temporary page object to generate navbar
-        from pypage.page import Page
+        from src.pypage.page import Page
         temp_page = Page("Preview", "Header", use_modern_navbar=(style == 'modern'))
         temp_page.configure_navbar(brand_name=brand_name, brand_icon=brand_icon)
         temp_page.nav_links = nav_links
@@ -111,7 +111,7 @@ page.run()
 @config_bp.route('/css-builder')
 def css_builder():
     """Show the CSS builder interface"""
-    return render_template('../tools/web_interface/css_builder.html')
+    return render_template('config/css_builder.html')
 
 @config_bp.route('/css-builder/generate', methods=['POST'])
 def generate_css():
@@ -119,7 +119,7 @@ def generate_css():
     try:
         css_data = request.get_json()
         
-        from pypage.css import CSSBuilder
+        from src.pypage.css import CSSBuilder
         
         css_builder = CSSBuilder()
         

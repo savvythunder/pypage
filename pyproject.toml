@@ -83,7 +83,10 @@ Changelog = "https://github.com/pypage/pypage/blob/main/CHANGELOG.md"
 pypage = "pypage.cli:main"
 
 [tool.setuptools]
-packages = ["pypage"]
+packages = {find = {where = ["src"], exclude = ["tests*", "test*", "docs*"]}}
+
+[tool.setuptools.package-dir]
+"" = "src"
 
 [tool.setuptools.package-data]
 pypage = [

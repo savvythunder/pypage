@@ -1,0 +1,370 @@
+{% extends "base.html" %}
+
+{% block title %}CSS Builder{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">CSS Rule Builder</h5>
+                </div>
+                <div class="card-body">
+                    <form id="cssBuilderForm">
+                        <!-- CSS Rules -->
+                        <div class="mb-4">
+                            <h6 class="text-primary">CSS Rules</h6>
+                            <div id="cssRulesContainer">
+                                <!-- Dynamic CSS rules will be added here -->
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="addCSSRule()">
+                                <i class="fas fa-plus"></i> Add Rule
+                            </button>
+                        </div>
+
+                        <!-- Responsive Rules -->
+                        <div class="mb-4">
+                            <h6 class="text-primary">Responsive Breakpoints</h6>
+                            <div id="responsiveRulesContainer">
+                                <!-- Dynamic responsive rules will be added here -->
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="addResponsiveRule()">
+                                <i class="fas fa-plus"></i> Add Responsive Rule
+                            </button>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-success" onclick="generateCSS()">
+                                <i class="fas fa-code"></i> Generate CSS
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="previewCSS()">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <!-- Generated CSS Panel -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Generated CSS</h5>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="copyCSS()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="card-body p-0">
+                    <pre id="generatedCSS" class="bg-dark text-light p-3 m-0" style="min-height: 300px; font-size: 0.9rem;">
+/* Click "Generate CSS" to see your styles here */
+                    </pre>
+                </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Live Preview</h5>
+                </div>
+                <div class="card-body">
+                    <div id="cssPreview">
+                        <div class="sample-element p-3 border rounded">
+                            <h4>Sample Element</h4>
+                            <p>This is a sample element to preview your styles.</p>
+                            <button class="btn btn-primary">Sample Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CSS Rule Template -->
+<template id="cssRuleTemplate">
+    <div class="css-rule-item border rounded p-3 mb-3">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <label class="form-label">Selector</label>
+                <input type="text" class="form-control css-selector" placeholder=".my-class or #my-id">
+            </div>
+            <div class="col-md-7">
+                <label class="form-label">Properties</label>
+                <div class="css-properties-container">
+                    <!-- CSS properties will be added here -->
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-info" onclick="addCSSProperty(this)">
+                    <i class="fas fa-plus"></i> Add Property
+                </button>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">&nbsp;</label>
+                <button type="button" class="btn btn-outline-danger btn-sm d-block" onclick="removeCSSRule(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- CSS Property Template -->
+<template id="cssPropertyTemplate">
+    <div class="css-property-row row align-items-center mb-2">
+        <div class="col-5">
+            <input type="text" class="form-control css-property-name" placeholder="property">
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control css-property-value" placeholder="value">
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeCSSProperty(this)">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+</template>
+
+<!-- Responsive Rule Template -->
+<template id="responsiveRuleTemplate">
+    <div class="responsive-rule-item border rounded p-3 mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">Selector</label>
+                <input type="text" class="form-control responsive-selector" placeholder=".my-class">
+            </div>
+            <div class="col-md-7">
+                <label class="form-label">Breakpoints</label>
+                <div class="row">
+                    <div class="col-6 mb-2">
+                        <label class="form-label small">XS (default)</label>
+                        <input type="text" class="form-control breakpoint-xs" placeholder="color: red">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="form-label small">SM (≥576px)</label>
+                        <input type="text" class="form-control breakpoint-sm" placeholder="color: blue">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="form-label small">MD (≥768px)</label>
+                        <input type="text" class="form-control breakpoint-md" placeholder="color: green">
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="form-label small">LG (≥992px)</label>
+                        <input type="text" class="form-control breakpoint-lg" placeholder="color: yellow">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small">XL (≥1200px)</label>
+                        <input type="text" class="form-control breakpoint-xl" placeholder="color: purple">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">&nbsp;</label>
+                <button type="button" class="btn btn-outline-danger btn-sm d-block" onclick="removeResponsiveRule(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+.css-rule-item {
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    border-color: rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+.responsive-rule-item {
+    background: rgba(var(--bs-secondary-rgb), 0.1);
+    border-color: rgba(var(--bs-secondary-rgb), 0.2) !important;
+}
+
+#generatedCSS {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#cssPreview {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    background: #f8f9fa;
+}
+</style>
+
+<script>
+function addCSSRule() {
+    const template = document.getElementById('cssRuleTemplate');
+    const clone = template.content.cloneNode(true);
+    
+    document.getElementById('cssRulesContainer').appendChild(clone);
+    
+    // Add a default property
+    const addPropertyBtn = clone.querySelector('[onclick="addCSSProperty(this)"]');
+    if (addPropertyBtn) {
+        addCSSProperty(addPropertyBtn);
+    }
+}
+
+function removeCSSRule(button) {
+    button.closest('.css-rule-item').remove();
+}
+
+function addCSSProperty(button) {
+    const template = document.getElementById('cssPropertyTemplate');
+    const clone = template.content.cloneNode(true);
+    
+    const container = button.closest('.css-rule-item').querySelector('.css-properties-container');
+    container.appendChild(clone);
+}
+
+function removeCSSProperty(button) {
+    button.closest('.css-property-row').remove();
+}
+
+function addResponsiveRule() {
+    const template = document.getElementById('responsiveRuleTemplate');
+    const clone = template.content.cloneNode(true);
+    
+    document.getElementById('responsiveRulesContainer').appendChild(clone);
+}
+
+function removeResponsiveRule(button) {
+    button.closest('.responsive-rule-item').remove();
+}
+
+function parseCSSProperties(propertyString) {
+    const properties = {};
+    if (!propertyString) return properties;
+    
+    const declarations = propertyString.split(';');
+    declarations.forEach(decl => {
+        const colonIndex = decl.indexOf(':');
+        if (colonIndex > 0) {
+            const property = decl.substring(0, colonIndex).trim();
+            const value = decl.substring(colonIndex + 1).trim();
+            if (property && value) {
+                properties[property] = value;
+            }
+        }
+    });
+    
+    return properties;
+}
+
+function getCSSConfig() {
+    const rules = [];
+    const responsive = [];
+    
+    // Get regular CSS rules
+    document.querySelectorAll('.css-rule-item').forEach(item => {
+        const selector = item.querySelector('.css-selector').value;
+        if (!selector) return;
+        
+        const properties = {};
+        item.querySelectorAll('.css-property-row').forEach(row => {
+            const name = row.querySelector('.css-property-name').value;
+            const value = row.querySelector('.css-property-value').value;
+            if (name && value) {
+                properties[name] = value;
+            }
+        });
+        
+        if (Object.keys(properties).length > 0) {
+            rules.push({ selector, properties });
+        }
+    });
+    
+    // Get responsive rules
+    document.querySelectorAll('.responsive-rule-item').forEach(item => {
+        const selector = item.querySelector('.responsive-selector').value;
+        if (!selector) return;
+        
+        const breakpoints = {};
+        ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+            const value = item.querySelector(`.breakpoint-${size}`).value;
+            if (value) {
+                breakpoints[size] = parseCSSProperties(value);
+            }
+        });
+        
+        if (Object.keys(breakpoints).length > 0) {
+            responsive.push({ selector, breakpoints });
+        }
+    });
+    
+    return { rules, responsive };
+}
+
+function generateCSS() {
+    const config = getCSSConfig();
+    
+    fetch('/css-builder/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(config)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('generatedCSS').textContent = data.css;
+        } else {
+            alert('Error generating CSS: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error generating CSS');
+    });
+}
+
+function previewCSS() {
+    const css = document.getElementById('generatedCSS').textContent;
+    const previewDiv = document.getElementById('cssPreview');
+    
+    // Remove existing style tag
+    const existingStyle = previewDiv.querySelector('style');
+    if (existingStyle) {
+        existingStyle.remove();
+    }
+    
+    // Add new style tag
+    const styleTag = document.createElement('style');
+    styleTag.textContent = css;
+    previewDiv.appendChild(styleTag);
+}
+
+function copyCSS() {
+    const css = document.getElementById('generatedCSS').textContent;
+    navigator.clipboard.writeText(css).then(() => {
+        // Show temporary success message
+        const button = event.target.closest('button');
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+            button.innerHTML = originalText;
+        }, 2000);
+    });
+}
+
+// Initialize with a sample rule
+document.addEventListener('DOMContentLoaded', function() {
+    addCSSRule();
+    const firstSelector = document.querySelector('.css-selector');
+    if (firstSelector) {
+        firstSelector.value = '.sample-element';
+        const firstProperty = document.querySelector('.css-property-name');
+        const firstValue = document.querySelector('.css-property-value');
+        if (firstProperty && firstValue) {
+            firstProperty.value = 'background-color';
+            firstValue.value = '#f0f8ff';
+        }
+    }
+});
+</script>
+{% endblock %}

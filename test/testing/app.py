@@ -9,7 +9,7 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from pypage import *
+from src.pypage import *
 from flask import Flask, render_template_string, request, jsonify, send_file
 import tempfile
 import webbrowser

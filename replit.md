@@ -13,7 +13,9 @@ A Flask web application that provides an interactive HTML generator using the Py
   - `main.py` - Application entry point
   - `models.py` - Database models
   - `routes/` - Flask blueprints for different sections
-  - `pypage/` - HTML generator library
+  - `src/pypage/` - HTML generator library
+  - `test/` - Testing application and documentation examples
+  - `docs/` - Complete documentation with component reference and images
   - `templates/` - Jinja2 templates
   - `static/` - CSS, JS, and other static assets
 
@@ -27,11 +29,16 @@ A Flask web application that provides an interactive HTML generator using the Py
 
 ## Recent Changes
 - **PyPI Package Creation (January 10, 2025)**: Converted project into a complete PyPI package
-  - Created comprehensive testing application in `testing/` folder for documentation
+  - Created comprehensive testing application in `test/` folder for documentation
   - Added PyPI package structure with setup.py, pyproject.toml, MANIFEST.in
   - Implemented CLI tools with `pypage` command for project creation
   - Added package metadata, license (MIT), and changelog
   - Successfully built wheel package for distribution
+  - Moved library code to `src/` folder structure for proper packaging
+  - Resolved conflicting readme files (removed readme.md, kept README.md)
+  - Added comprehensive component documentation with detailed API reference
+  - Created additional visual documentation with SVG diagrams
+  - Fixed all import paths to work with new src structure
 - Fixed import path from `html_generator` to `pypage` for proper module resolution
 - Updated Flask configuration for Replit environment compatibility
 - Ensured proper database setup with SQLAlchemy

@@ -6,24 +6,30 @@ Setup script for PyPage - Enhanced HTML Generator Library
 from setuptools import setup, find_packages
 import os
 
+
 # Read the README file for long description
 def read_readme():
     with open("README.md", "r", encoding="utf-8") as fh:
         return fh.read()
+
 
 # Read requirements from pyproject.toml or requirements file
 def read_requirements():
     requirements = []
     if os.path.exists("requirements.txt"):
         with open("requirements.txt", "r") as f:
-            requirements = [line.strip() for line in f if line.strip() and not line.startswith("#")]
+            requirements = [
+                line.strip() for line in f
+                if line.strip() and not line.startswith("#")
+            ]
     return requirements
+
 
 setup(
     name="pypage",
     version="3.0.0",
     author="PyPage Development Team",
-    author_email="dev@pypage.org",
+    author_email="savvythunder219@gmail.com",
     description="Enhanced HTML Generator Library with advanced features",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
@@ -33,7 +39,8 @@ setup(
         "Documentation": "https://docs.pypage.org",
         "Source Code": "https://github.com/pypage/pypage",
     },
-    packages=find_packages(exclude=["tests*", "testing*", "docs*", "examples*"]),
+    packages=find_packages(where="src", exclude=["tests*", "test*", "docs*", "examples*"]),
+    package_dir={"": "src"},
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
