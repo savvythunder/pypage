@@ -62,28 +62,88 @@ Dynamic: home-page
 Dynamic: license-file
 Dynamic: requires-python
 
-# PyPage - Enhanced HTML Generator Library
+# 🚀 PyPage - Enhanced HTML Generator Library
 
-PyPage is a comprehensive Python library for generating HTML programmatically with advanced features including dark mode, animations, responsive design, and modern UI components.
+<div align="center">
+
+![PyPage Logo](docs/images/logo.svg)
+
+**Create stunning, responsive web pages with Python**
+
+[![PyPI version](https://badge.fury.io/py/pypage.svg)](https://badge.fury.io/py/pypage)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<!-- [![Downloads](https://pepy.tech/badge/pypage)](https://pepy.tech/project/pypage) -->
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](docs/)
+
+</div>
+
+PyPage is a comprehensive Python library that revolutionizes HTML generation with advanced features including **dark mode**, **animations**, **responsive design**, and **modern UI components**. Build professional websites programmatically with an intuitive, object-oriented approach.
+
+<div align="center">
 
 ![Powerful Features](docs/images/features.png)
-*Everything you need to create modern webpages programmatically*
+*🎯 Everything you need to create modern webpages programmatically*
+
+</div>
+
+<div align="center">
 
 ![Quick Documentation](docs/images/documentation.png)
-*Complete component reference with easy-to-use syntax*
+*📚 Complete component reference with easy-to-use syntax*
 
-## 🚀 Features
+</div>
 
-- **Modern Components**: Comprehensive set of HTML components with Bootstrap 5 integration
-- **Dark Mode**: Built-in dark mode support with system preference detection
-- **Animations**: Smooth animations and transitions (fade, slide, scroll effects)
-- **Responsive Design**: Mobile-first responsive components
-- **Data Visualization**: Charts, graphs, and KPI cards
-- **Advanced Forms**: Complete form system with validation
-- **CSS Builder**: Programmatic CSS generation with responsive breakpoints
-- **Export Tools**: PDF and JSON export capabilities
-- **Plugin System**: Extensible architecture for custom components
-- **Flask Integration**: Seamless integration with Flask applications
+<div align="center">
+
+![Hero Banner](docs/images/hero-banner.svg)
+
+</div>
+
+## ✨ Why Choose PyPage?
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎨 **Modern & Beautiful**
+- **Bootstrap 5 Integration** - Professional styling out of the box
+- **Dark Mode Support** - Automatic system preference detection
+- **Custom Themes** - Material, Tailwind, Bulma support
+- **Responsive Design** - Mobile-first approach
+
+</td>
+<td width="50%">
+
+### ⚡ **Fast & Powerful**
+- **Component-Based** - Reusable, modular architecture
+- **Type-Safe** - Full type hints for better development
+- **Performance Optimized** - WebAssembly integration
+- **Hot Reload** - Development server with live updates
+
+</td>
+</tr>
+<tr>
+<td>
+
+### 🛠️ **Developer Friendly**
+- **Intuitive API** - Pythonic, object-oriented design
+- **Rich Documentation** - Complete guides and examples
+- **CLI Tools** - Project scaffolding and templates
+- **Flask Integration** - Seamless web framework support
+
+</td>
+<td>
+
+### 🚀 **Production Ready**
+- **Export Options** - PDF, JSON, static HTML
+- **SEO Optimized** - Built-in meta tags and structure
+- **Accessibility** - WCAG compliance tools
+- **Plugin System** - Extensible architecture
+
+</td>
+</tr>
+</table>
 
 ## 📦 Installation
 
@@ -247,29 +307,144 @@ python app.py
 
 Visit `http://localhost:5001` to run interactive tests and see component demonstrations.
 
-## 📖 Documentation
+## 📖 Documentation & Resources
+
+<div align="center">
+
+| 📘 **Core Documentation** | 🎯 **Guides & Tutorials** | 🛠️ **Development** |
+|:---------------------------|:---------------------------|:--------------------|
+| [**🚀 Quick Start**](docs/quick-start.md)<br/>*Get up and running in 5 minutes* | [**🎨 Theme Customization**](docs/themes.md)<br/>*Create beautiful custom themes* | [**🔧 API Reference**](docs/api-reference.md)<br/>*Complete component documentation* |
+| [**📦 Installation Guide**](docs/installation.md)<br/>*Multiple installation options* | [**📱 Responsive Design**](docs/responsive.md)<br/>*Mobile-first development* | [**🧪 Testing Guide**](docs/testing.md)<br/>*Test your components* |
+| [**🏗️ Architecture**](docs/architecture.md)<br/>*Understanding PyPage structure* | [**🌙 Dark Mode Setup**](docs/dark-mode.md)<br/>*Implement dark mode support* | [**🔌 Plugin Development**](docs/plugins.md)<br/>*Create custom components* |
+
+</div>
+
+### 📊 Visual Guides
+
+<div align="center">
 
 ![Architecture Overview](docs/images/architecture.svg)
-*Complete component architecture and organization*
+**Component Architecture** - *Complete system organization*
 
 ![Development Workflow](docs/images/workflow.svg)
-*Simple workflow from installation to deployment*
+**Development Workflow** - *From installation to deployment*
 
-- **Getting Started**: See the `docs/getting-started.md` guide
-- **API Reference**: Complete API documentation in `docs/`
-- **Examples**: Example projects in the `examples/` directory
-- **Component Reference**: Complete component documentation in `docs/component_reference.md`
-- **Testing**: Interactive testing application in `test/`
+</div>
+
+### 🎓 Learning Resources
+
+<div align="center">
+
+![Theme Showcase](docs/images/theme-showcase.svg)
+**Theme System** - *Beautiful, customizable themes for every project*
+
+</div>
+
+- **[📚 Component Gallery](docs/components/)** - Visual showcase of all components
+- **[💡 Examples Library](docs/examples/)** - Real-world usage examples  
+- **[🎮 Interactive Playground](test/)** - Live testing environment
+- **[📺 Video Tutorials](docs/tutorials/)** - Step-by-step video guides
+- **[❓ FAQ](docs/faq.md)** - Common questions and solutions
+- **[🎨 Theme Gallery](docs/themes.md)** - Beautiful theme customization examples
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our contributing guidelines:
+We love contributions from the community! PyPage is built by developers, for developers.
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new features
-5. Submit a pull request
+### 🚀 Ways to Contribute
+
+<table>
+<tr>
+<td width="33%">
+
+**🐛 Bug Reports**
+- Found an issue? Report it!
+- Include reproduction steps
+- Provide system details
+- Help make PyPage better
+
+</td>
+<td width="33%">
+
+**💡 Feature Requests**
+- Suggest new components
+- Propose improvements
+- Share your ideas
+- Shape PyPage's future
+
+</td>
+<td width="33%">
+
+**📝 Documentation**
+- Improve guides
+- Add examples
+- Fix typos
+- Help others learn
+
+</td>
+</tr>
+<tr>
+<td>
+
+**🔧 Code Contributions**
+- Fix bugs
+- Add features
+- Optimize performance
+- Write tests
+
+</td>
+<td>
+
+**🎨 Themes & Examples**
+- Create beautiful themes
+- Share real-world examples
+- Build showcase projects
+- Inspire others
+
+</td>
+<td>
+
+**💬 Community Support**
+- Answer questions
+- Help newcomers
+- Share knowledge
+- Build community
+
+</td>
+</tr>
+</table>
+
+### 📋 Quick Start for Contributors
+
+```bash
+# 1. Fork and clone the repository
+git clone https://github.com/yourusername/pypage.git
+cd pypage
+
+# 2. Install development dependencies  
+pip install -e .[dev]
+
+# 3. Make your changes
+# Edit code, add tests, update docs
+
+# 4. Run tests and checks
+pytest                    # Run test suite
+black .                   # Format code
+flake8 .                  # Check style
+mypy src/pypage/          # Type checking
+
+# 5. Submit your pull request
+git commit -m "Add amazing feature"
+git push origin feature-branch
+```
+
+### 🎯 Contribution Guidelines
+
+- **Follow the code style** - We use Black and follow PEP 8
+- **Add tests** - New features should include tests
+- **Update documentation** - Keep docs current with changes
+- **Be respectful** - Follow our code of conduct
+- **Start small** - Begin with minor improvements or bug fixes
 
 ## 📄 License
 
